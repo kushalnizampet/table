@@ -1,0 +1,91 @@
+<h1 mat-dialog-title style="justify-content: center;text-align: center;">ADD DATA</h1>
+<mat-icon mat-dialog-close style="cursor: pointer;color: red;position: absolute;top: 10px;left: 680px;">cancel</mat-icon>
+<form [formGroup]="myform" (ngSubmit)="onSubmit()">
+    <div style="display: flex;">
+    <mat-form-field appearance="fill" style="margin-right: 25px;">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name" formControlName="name" type="text">
+        <div *ngIf="this.myform.controls['name']?.errors && this.myform.controls['name']?.touched">
+            <span *ngIf="this.myform.controls['name']?.errors?.['required']" class="errors">Full Name is Required</span>
+          <span *ngIf="this.myform.controls['name']?.errors?.['maxlength']" class="errors">Only 15 characters are allowed</span>
+        </div>
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin-right: 25px;">
+        <mat-label>Father Name</mat-label>
+        <input matInput placeholder="Father Name" formControlName="fatherName" type="text">
+        <div *ngIf="this.myform.controls['fatherName']?.errors && this.myform.controls['fatherName']?.touched">
+            <span *ngIf="this.myform.controls['fatherName']?.errors?.['required']" class="errors">Full Name is Required</span>
+          <span *ngIf="this.myform.controls['fatherName']?.errors?.['maxlength']" class="errors">Only 15 characters are allowed</span>
+          </div>
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin-right: 25px;">
+        <mat-label>Room Number</mat-label>
+        <input matInput placeholder="Room Number" formControlName="roomNumber" >
+        <div *ngIf="this.myform.controls['roomNumber']?.errors && this.myform.controls['roomNumber']?.touched">
+            <span *ngIf="this.myform.controls['roomNumber']?.errors?.['required']" class="errors">Room number is Required</span>
+            <span *ngIf="this.myform.controls['roomNumber']?.errors?.['minlength']" class="errors">enter valid Room number (ex:101)</span>
+            <span *ngIf="this.myform.controls['roomNumber']?.errors?.['maxlength']" class="errors">enter valid Room number(ex:101)</span>
+        </div>
+    </mat-form-field> 
+    </div>
+    <div style="display: flex;">
+       
+        <mat-form-field appearance="fill" style="margin-right: 25px;">
+            <mat-label>Age</mat-label>
+            <input matInput placeholder="Age" formControlName="age" type="number">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="margin-right: 15px;">
+            <mat-label>Date of Birth</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dob">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" >
+            <mat-label>Email Id</mat-label>
+            <input matInput placeholder="Email Id" formControlName="email" type="text">
+            <div *ngIf="this.myform.controls['email']?.errors && this.myform.controls['email']?.touched">
+                <span *ngIf="this.myform.controls['email']?.errors?.['required']" class="errors">Full Name is Required</span>
+                <span *ngIf="this.myform.controls['email']?.errors?.['maxlength']" class="errors">Only 32 characters are allowed</span>
+                <span *ngIf="this.myform.controls['email']?.errors?.['pattern']" class="errors">Enter valid email address</span>
+            </div>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <label>Food Type:</label>
+    <mat-radio-group class="example-radio-group" formControlName="foodType" style="margin-right: 75px;">
+      <mat-radio-button *ngFor="let food of foodType" [value]="food" class="example-radio-button">
+          {{food}}
+      </mat-radio-button>
+    </mat-radio-group>
+    
+    <mat-form-field appearance="fill" style="margin-right: 25px;">
+        <mat-label>Mobile Number</mat-label>
+        <input matInput placeholder="Mobile Number" formControlName="mobileNumber" type="number">
+        <div *ngIf="this.myform.controls['mobileNumber']?.errors && this.myform.controls['mobileNumber']?.touched">
+            <span *ngIf="this.myform.controls['mobileNumber']?.errors?.['required']" class="errors">mobile number is Required</span>
+            <span *ngIf="this.myform.controls['mobileNumber']?.errors?.['minlength']" class="errors">enter valid mobile number</span>
+        </div>
+    </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="fill" style="margin-right: 25px;">
+            <mat-label>Advance Amount</mat-label>
+            <input matInput placeholder="Advance" formControlName="advance" type="number">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="margin-right: 25px;">
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Address" formControlName="address" type="text">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="margin-right: 25px;" >
+            <mat-label>City</mat-label>
+            <input matInput placeholder="City" formControlName="city" type="text">
+        </mat-form-field>
+    </div>
+</form>
+    <div mat-dialog-action [align]="'end'">
+    <button mat-raised-button color="warn" style="justify-content: center;text-align: center;" (click)="onSubmit()">{{data?'Update':'Submit'}}</button>
